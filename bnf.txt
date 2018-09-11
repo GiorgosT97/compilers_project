@@ -1,0 +1,50 @@
+Ερώτημα 1. i.
+
+
+<ss:Workbook> 	         ::= <ss:Styles><ss:Workbook><ss:Worksheet>|<ss:Styles><ss:Worksheet>|<ss:Workbook><ss:Worksheet>|<ss:Worksheet>
+
+<ss:Styles>    	         ::= <ss:Styles><ss:Style>|ε
+
+<ss:Style>     	         ::= <ss:ID>
+
+<ss:Worksheet> 	         ::= <ss:Worksheet><ss:Table>|<ss:Name><ss:Protected>|<ss:Protected><ss:Name>|<ss:Name>
+
+<ss:Table>   	         ::= <ss:Column/><ss:Table><ss:Row>|<ss:Table><ss:Column/>|<ss:Table><ss:Row>|<ss:Table><ss:ExpandedColumnCount>|<ss:Table><ss:ExpandedRowCount>|<ss:Table><ss:StyleID>|ε
+
+<ss:Column/>      	 ::= <ss:Column/><ss:Hidden>|<ss:Column/><ss:Width>|<ss:Column/><ss:StyleID>|ε
+
+<ss:Row>      	         ::= <ss:Row><ss:Cell>|<ss:Row><ss:Height>|<ss:Row><ss:Hidden>|<ss:Row><ss:StyleID>|ε
+	
+<ss:Cell>     	         ::= <ss:Cell><ss:Data>|<ss:Cell><ss:MergeAcross>|<ss:Cell><ss:MergeDown>|ε
+
+<ss:Data>    	         ::= <ss:Type>
+
+<ss:ID>       	         ::= <ss:ID><letter>|<ss:ID><digit>|<letter>|<digit>
+
+<ss:Name>                ::= <ss:Name><letter>|<ss:Name><digit>|<digit>|<letter>
+
+<ss:Protected>           ::= <boolean>
+
+<ss:ExpandedColumnCount> ::= <ss:ExpandedColumnCount><digit>|<digit>
+
+<ss:ExpandedRowCount>    ::= <ss:ExpandedRowCount><digit>|<digit>
+
+<ss:Hidden>              ::= <boolean>
+
+<ss:Width>               ::= <ss:Width><digit>|<digit>
+
+<ss:StyleID>             ::= <ss:StyleID><letter>|<ss:StyleID><digit>|<letter>|<digit>
+
+<ss:Height>              ::= <ss:Height><digit>|<digit>
+
+<ss:MergeAcross>         ::= <ss:MergeAcross><digit>|<digit>
+
+<ss:MergeDown>           ::= <ss:MergeDown><digit>|<digit>
+
+<ss:Type>                ::= "Number" | "DateTime" | "Boolean" | "String"
+
+<letter>       	         ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+
+<digit>        	         ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+<boolean>      	         ::= "0" | "1"
