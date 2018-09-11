@@ -35,7 +35,8 @@ TableAttributes          ::= TableAttributes <ss:ExpandedColumnCount>
 <ss:Column/>             ::= "<ss:Column" ColumnRowAttributes"/>"
                             |"<ss:Column" ColumnRowAttributes"/>" <ss:Column/>
 
-<ss:Row>      	         ::= <ss:Row ColumnRowAttributes> <>
+<ss:Row>      	         ::= "<ss:Row" ColumnRowAttributes">" "</ss:Row>"
+                            |"<ss:Row" ColumnRowAttributes">" "</ss:Row>" <ss:Row>
 
 ColumnRowAttributes      ::= ColumnRowAttributes <ss:Hidden>
                             |ColumnRowAttributes <ss:Width>
@@ -44,7 +45,13 @@ ColumnRowAttributes      ::= ColumnRowAttributes <ss:Hidden>
 	
 <ss:Cell>     	         ::= <ss:Cell><ss:Data>|<ss:Cell><ss:MergeAcross>|<ss:Cell><ss:MergeDown>|e
 
-<ss:Data>    	         ::= <ss:Type>
+CellAttributes           ::= CellAttributes <ss:MergeAcross>
+                            |CellAttributes <ss:MergeDown>
+                            |CellAttributes <ss:StyleID>
+
+<ss:Data>    	         ::= "<ss:Data" <ss:Type>">" "</ss:Data>"
+                            |"<ss:Data" <ss:Type>">" "</ss:Data>" <ss:Data>
+                            |"<ss:Data" <ss:Type>"/>"
 
 <ss:ID>       	         ::= <ss:ID><letter>|<ss:ID><digit>|<letter>|<digit>
 
