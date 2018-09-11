@@ -1,21 +1,48 @@
-Ερώτημα 1. i.
+<ss:Workbook> 	         ::= "<ss:Workbook>" <ss:Styles> <ss:Worksheet>" </ss:Workbook>"
+                            |"<ss:Workbook>" <ss:Worksheet> "</ss:Workbook>"
 
+<ss:Styles>    	         ::= "<ss:Styles>"<ss:Style>"</ss:Styles>"
+                            |"<ss:Styles>"<ss:Style>"</ss:Styles>" <ss:Styles>
+                            |"<ss:Styles/>"
+                            |"<ss:Styles/>" <ss:Styles>
 
-<ss:Workbook> 	         ::= <ss:Styles><ss:Workbook><ss:Worksheet>|<ss:Styles><ss:Worksheet>|<ss:Workbook><ss:Worksheet>|<ss:Worksheet>
+<ss:Style>     	         ::= "<ss:Style" <ss:ID>"/>"
+                            |"<ss:Style" <ss:ID>"> </ss:Style>"
 
-<ss:Styles>    	         ::= <ss:Styles><ss:Style>|ε
+<ss:Worksheet> 	         ::= "<ss:Worksheet "<ss:Name>">" "</ss:Worksheet>" </ss:Worksheet>
+                            |"<ss:Worksheet "<ss:Name>">" "</ss:Worksheet>"
+                            |"<ss:Worksheet "<ss:Name> <ss:Protected>">" "</ss:Worksheet>" <ss:Worksheet>
+                            |"<ss:Worksheet "<ss:Name> <ss:Protected>">""</ss:Worksheet>"
+                            |"<ss:Worksheet "<ss:Name>">" <ss:Table> "</ss:Worksheet>" <ss:Worksheet>
+                            |"<ss:Worksheet "<ss:Name>">" <ss:Table> "</ss:Worksheet>"
+                            |"<ss:Worksheet "<ss:Name> <ss:Protected> ">" <ss:Table> "</ss:Worksheet>" <ss:Worksheet>
+                            |"<ss:Worksheet "<ss:Name> <ss:Protected> ">" <ss:Table> "</ss:Worksheet>"
 
-<ss:Style>     	         ::= <ss:ID>
+<ss:Table>   	         ::= "<ss:Table" TableAttributes"/>"
+                            |"<ss:Table" TableAttributes"/>" <ss:Table>
+                            |"<ss:Table" TableAttributes">" <ss:Column/> "</ss:Table>"
+                            |"<ss:Table" TableAttributes">" <ss:Column/> "</ss:Table>" <ss:Table>
+                            |"<ss:Table" TableAttributes">" <ss:Row> "</ss:Table>"
+                            |"<ss:Table" TableAttributes">" <ss:Row> "</ss:Table>" <ss:Table>
+                            |"<ss:Table" TableAttributes">" <ss:Column/> <ss:Row> "</ss:Table>"
+                            |"<ss:Table" TableAttributes">" <ss:Column/> <ss:Row> "</ss:Table>" <ss:Table>
 
-<ss:Worksheet> 	         ::= <ss:Worksheet><ss:Table>|<ss:Name><ss:Protected>|<ss:Protected><ss:Name>|<ss:Name>
+TableAttributes          ::= TableAttributes <ss:ExpandedColumnCount>
+                            |TableAttributes <ss:ExpandedRowCount>
+                            |TableAttributes <ss:StyleID>
+                            |e
 
-<ss:Table>   	         ::= <ss:Column/><ss:Table><ss:Row>|<ss:Table><ss:Column/>|<ss:Table><ss:Row>|<ss:Table><ss:ExpandedColumnCount>|<ss:Table><ss:ExpandedRowCount>|<ss:Table><ss:StyleID>|ε
+<ss:Column/>             ::= "<ss:Column" ColumnRowAttributes"/>"
+                            |"<ss:Column" ColumnRowAttributes"/>" <ss:Column/>
 
-<ss:Column/>      	 ::= <ss:Column/><ss:Hidden>|<ss:Column/><ss:Width>|<ss:Column/><ss:StyleID>|ε
+<ss:Row>      	         ::= <ss:Row ColumnRowAttributes> <>
 
-<ss:Row>      	         ::= <ss:Row><ss:Cell>|<ss:Row><ss:Height>|<ss:Row><ss:Hidden>|<ss:Row><ss:StyleID>|ε
+ColumnRowAttributes      ::= ColumnRowAttributes <ss:Hidden>
+                            |ColumnRowAttributes <ss:Width>
+                            |ColumnRowAttributes <ss:StyleID>
+                            |e
 	
-<ss:Cell>     	         ::= <ss:Cell><ss:Data>|<ss:Cell><ss:MergeAcross>|<ss:Cell><ss:MergeDown>|ε
+<ss:Cell>     	         ::= <ss:Cell><ss:Data>|<ss:Cell><ss:MergeAcross>|<ss:Cell><ss:MergeDown>|e
 
 <ss:Data>    	         ::= <ss:Type>
 
@@ -27,7 +54,7 @@
 
 <ss:ExpandedColumnCount> ::= <ss:ExpandedColumnCount><digit>|<digit>
 
-<ss:ExpandedRowCount>    ::= <ss:ExpandedRowCount><digit>|<digit>
+<ss:ExpandedRowCount>    ::= <ss:ExpandedRowCount <digit> >|<digit>
 
 <ss:Hidden>              ::= <boolean>
 
