@@ -9,17 +9,12 @@ word   {letter}{letter}+
 digit  [0-9]
 number {digit}{digit}+
 alphar ({letter}|{digit})+
-other_chars          [.,_:]
+other_chars [.,_:]
 whitespace [ \t]
 newline [\n]
 bool 0|1
 prefix ss:
-start_tag  \<{prefix}{word}\>
-closing_tag \<\/{prefix}{word}\>
-self_closing_tag \<{prefix}{word}\/\>
-attribute  {prefix}{word}\=\"{alphar}\"
-tag_with_attr (\<{prefix}{word}(\ {attribute})+\>)|(\<{prefix}{word}(\ {attribute})+\/\>)
-comment \<\!\-\-((\ )|({alphar}))+\-\-\>
+
 content ({alphar}|{other_chars}|{alphar}{whitespace}|{other_chars}{whitespace})+
 
 Workbook_start_tag "<"{prefix}"Workbook>"
@@ -107,11 +102,6 @@ Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")
 {Data_closing_tag} {return DcT;} 
 {Data_self_closing_tag} {return DscT;} 
 
-{start_tag} {return START_TAG;}
-{closing_tag} {return CLOSING_TAG;}
-{self_closing_tag} {return SELF_CLOSING_TAG}
-{attribute} {printf(" ^^^^attribute^^^^ ");}
-{tag_with_attr} {printf(" ^^^^tag with attr^^^^ ");}
 "<!--"[^-]*"-->" {printf(" ^^^^COMMENT^^^^ ");}
 {content} {return CONTENT;}
 %%
