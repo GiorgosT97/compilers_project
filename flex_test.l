@@ -76,6 +76,37 @@ Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")
                     |("String")"/>"
 %%
 
+{Workbook_start_tag} {return WsT;}  
+{Workbook_closing_tag} {return WcT;}
+{Styles_start_tag} {return StT;}
+{Styles_closing_tag} {return ScT;}
+{Styles_self_closing_tag} {return SscT;}
+{Style_Attribute} {return SA;}
+{Style_start_tag} {return SsT;}
+{Style_closing_tag} {return ScT;}
+{Style_self_closing_tag} {return SscT;}
+{Worksheet_attributes} {return WA;}
+{Worksheet_start_tag} {return WsT;} 
+{Worksheet_closing_tag} {return WcT;}
+{Worksheet_self_closing_tag} {return WscT;}
+{Table_attributes} {return TA;}
+{Table_start_tag} {return TsT;}
+{Table_closing_tag} {return TcT;}
+{Table_self_closing_tag} {return TscT;}
+{Column_attributes} {return CA;}
+{Column_self_closing_tag} {return CscT;}
+{Row_attributes} {return RA;}
+{Row_start_tag} {return RsT;}
+{Row_closing_tag} {return RcT;}
+{Row_self_closing_tag} {return RscT;}
+{Cell_attributes} {return CA;}
+{Cell_start_tag} {return CsT;} 
+{Cell_closing_tag} {return CcT;} 
+{Cell_self_closing_tag} {return CscT;} 
+{Data_start_tag} {return DsT;} 
+{Data_closing_tag} {return DcT;} 
+{Data_self_closing_tag} {return DscT;} 
+
 {start_tag} {return START_TAG;}
 {closing_tag} {return CLOSING_TAG;}
 {self_closing_tag} {return SELF_CLOSING_TAG}
