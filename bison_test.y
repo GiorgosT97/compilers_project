@@ -12,41 +12,43 @@ extern FILE *yyout;
 %token CONTENT
 %token COMMENT
 %token WsT
+%token WBsT
 %token WcT
-%token StT
-%token ScT
-%token SscT
+%token WBcT
+%token WscT
 %token SA
 %token SsT
 %token ScT
 %token SscT
+%token SSsT
+%token SScT
+%token SSscT
 %token WA
-%token WsT
-%token WcT
-%token WscT
 %token TA
 %token TsT
 %token TcT
 %token TscT
-%token CA
-%token CscT
 %token RA
 %token RsT
 %token RcT
 %token RscT
 %token CA
-%token CsT
-%token CcT
 %token CscT
+%token CEA
+%token CEsT
+%token CEcT
+%token CEscT
 %token DsT
 %token DcT
 %token DscT
 
 %%
+
 text: CONTENT  | ;
 data_element: DsT text DcT 
-                | DscT { printf("HELO"); }
+                | DscT { fprintf("HELO"); }
 ;
+
 %%
 
 void yyerror (char *s)

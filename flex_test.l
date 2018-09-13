@@ -57,11 +57,11 @@ Data_closing_tag "</"{prefix}"Data>"
 Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|("Boolean")|("String")"/>"
 %%
 
-{Workbook_start_tag} {return WsT;}  
-{Workbook_closing_tag} {return WcT;}
-{Styles_start_tag} {return StT;}
-{Styles_closing_tag} {return ScT;}
-{Styles_self_closing_tag} {return SscT;}
+{Workbook_start_tag} {return WBsT;}  
+{Workbook_closing_tag} {return WBcT;}
+{Styles_start_tag} {return SStT;}
+{Styles_closing_tag} {return SScT;}
+{Styles_self_closing_tag} {return SSscT;}
 {Style_Attribute} {return SA;}
 {Style_start_tag} {return SsT;}
 {Style_closing_tag} {return ScT;}
@@ -80,10 +80,10 @@ Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|(
 {Row_start_tag} {return RsT;}
 {Row_closing_tag} {return RcT;}
 {Row_self_closing_tag} {return RscT;}
-{Cell_attributes} {return CA;}
-{Cell_start_tag} {return CsT;} 
-{Cell_closing_tag} {return CcT;} 
-{Cell_self_closing_tag} {return CscT;} 
+{Cell_attributes} {return CEA;}
+{Cell_start_tag} {return CEsT;} 
+{Cell_closing_tag} {return CEcT;} 
+{Cell_self_closing_tag} {return CEscT;} 
 {Data_start_tag} {return DsT;} 
 {Data_closing_tag} {return DcT;} 
 {Data_self_closing_tag} {return DscT;} 
