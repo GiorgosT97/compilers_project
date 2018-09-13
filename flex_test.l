@@ -1,4 +1,7 @@
+%{
+#include "bison_test.tab.h"
 
+%}
 %option noyywrap
 
 letter [a-zA-Z]
@@ -25,14 +28,6 @@ content ({alphar}|{other_chars}|{alphar}{whitespace}|{other_chars}{whitespace})+
 {attribute} {printf(" ^^^^attribute^^^^ ");}
 {tag_with_attr} {printf(" ^^^^tag with attr^^^^ ");}
 "<!--"[^-]*"-->" {printf(" ^^^^COMMENT^^^^ ");}
-{content} {printf("CONTENT");}
+{content} {return CONTENT;}
 %%
 
-void main(int argc, char ** argv)
-{
-   
-    yyin = fopen(argv[1], "r");
-    yylex();
-
-
-}							    

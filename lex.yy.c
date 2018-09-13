@@ -504,7 +504,10 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "flex_test.l"
-#line 508 "lex.yy.c"
+#line 2 "flex_test.l"
+#include "bison_test.tab.h"
+
+#line 511 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -722,10 +725,10 @@ YY_DECL
 		}
 
 	{
-#line 20 "flex_test.l"
+#line 23 "flex_test.l"
 
 
-#line 729 "lex.yy.c"
+#line 732 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -784,46 +787,46 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 22 "flex_test.l"
+#line 25 "flex_test.l"
 {printf("^^^^START TAG^^^^");}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 23 "flex_test.l"
+#line 26 "flex_test.l"
 {printf(" ^^^^Tag CLose^^^^ ");}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 24 "flex_test.l"
+#line 27 "flex_test.l"
 {printf(" ^^^^Tag Self Closing^^^^ ");}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 25 "flex_test.l"
+#line 28 "flex_test.l"
 {printf(" ^^^^attribute^^^^ ");}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 26 "flex_test.l"
+#line 29 "flex_test.l"
 {printf(" ^^^^tag with attr^^^^ ");}
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 27 "flex_test.l"
+#line 30 "flex_test.l"
 {printf(" ^^^^COMMENT^^^^ ");}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 28 "flex_test.l"
-{printf("CONTENT");}
+#line 31 "flex_test.l"
+{return CONTENT;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 29 "flex_test.l"
+#line 32 "flex_test.l"
 ECHO;
 	YY_BREAK
-#line 827 "lex.yy.c"
+#line 830 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1824,16 +1827,8 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 29 "flex_test.l"
+#line 32 "flex_test.l"
 
 
 
-void main(int argc, char ** argv)
-{
-   
-    yyin = fopen(argv[1], "r");
-    yylex();
-
-
-}							    
 
