@@ -10,10 +10,43 @@ extern FILE *yyout;
 %}
 
 %token CONTENT
-
+%token COMMENT
+%token WsT
+%token WcT
+%token StT
+%token ScT
+%token SscT
+%token SA
+%token SsT
+%token ScT
+%token SscT
+%token WA
+%token WsT
+%token WcT
+%token WscT
+%token TA
+%token TsT
+%token TcT
+%token TscT
+%token CA
+%token CscT
+%token RA
+%token RsT
+%token RcT
+%token RscT
+%token CA
+%token CsT
+%token CcT
+%token CscT
+%token DsT
+%token DcT
+%token DscT
 
 %%
-text : CONTENT | ;
+text: CONTENT  | ;
+data_element: DsT text DcT 
+                | DscT { printf("HELO"); }
+;
 %%
 
 void yyerror (char *s)

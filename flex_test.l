@@ -25,7 +25,7 @@ Styles_closing_tag "</"{prefix}"Styles>"
 Styles_self_closing_tag "<"{prefix}"Styles/>"
 
 Style_Attribute \ {prefix}"ID="{alphar}
-Style_start_tag "<"{prefix}Style"{Style_Attribute}{1}">"
+Style_start_tag "<"{prefix}"Style"{Style_Attribute}{1}">"
 Style_closing_tag "</"{prefix}"Style>"
 Style_self_closing_tag "<"{prefix}"Style"{Style_Attribute}{1}"/>"
 
@@ -34,41 +34,27 @@ Worksheet_start_tag "<"{prefix}"Worksheet"{Worksheet_attributes}">"
 Worksheet_closing_tag "</"{prefix}"Worksheet>"
 Worksheet_self_closing_tag "<"{prefix}"Worksheet "{Worksheet_attributes}"/>"
 
-Table_attributes ((\ {prefix}"ExpandedColumnCount="{number})
-                    |(\ {prefix}"ExpandedRowCount="{number})
-                    |(\ {prefix}"StyleID="{alphar}))*
+Table_attributes ((\ {prefix}"ExpandedColumnCount="{number})|(\ {prefix}"ExpandedRowCount="{number})|(\ {prefix}"StyleID="{alphar}))*
 Table_start_tag "<"{prefix}"Table"{Table_attributes}">"
 Table_closing_tag "</"{prefix}"Table>"
 Table_self_closing_tag "<"{prefix}"Table"{Table_attributes}"/>"
 
-Column_attributes ((\ {prefix}"Hidden="{bool})
-                    |(\ {prefix}"Width="{number})
-                    |(\ {prefix}"StyleID="{alphar}))*
+Column_attributes ((\ {prefix}"Hidden="{bool})|(\ {prefix}"Width="{number})|(\ {prefix}"StyleID="{alphar}))*
 Column_self_closing_tag "<"{prefix}"Column"{Column_attributes}"/>"
 
-Row_attributes ((\ {prefix}"Height="{number})
-                    |(\ {prefix}"Hidden="{bool})
-                    |(\ {prefix}"StyleID="{alphar}))*
+Row_attributes ((\ {prefix}"Height="{number})|(\ {prefix}"Hidden="{bool})|(\ {prefix}"StyleID="{alphar}))*
 Row_start_tag "<"{prefix}"Row"{Row_attributes}">"
 Row_closing_tag "</"{prefix}"Row>"
 Row_self_closing_tag "<"{prefix}"Row"{Row_attributes}"/>"
 
-Cell_attributes ((\ {prefix}"MergeAcross="{number})
-                    |(\ {prefix}"MergeDown="{number})
-                    |(\ {prefix}"StyleID="{alphar}))*
+Cell_attributes ((\ {prefix}"MergeAcross="{number})|(\ {prefix}"MergeDown="{number})|(\ {prefix}"StyleID="{alphar}))*
 Cell_start_tag "<"{prefix}"Cell"{Cell_attributes}">"
 Cell_closing_tag "</"{prefix}"Cell>"
 Cell_self_closing_tag "<"{prefix}"Cell"{Cell_attributes}"/>"
 
-Data_start_tag "<"{prefix}"Data "{prefix}"Type="("Number")
-                    |("DateTime")
-                    |("Boolean")
-                    |("String")">"
+Data_start_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|("Boolean")|("String")">"
 Data_closing_tag "</"{prefix}"Data>"
-Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")
-                    |("DateTime")
-                    |("Boolean")
-                    |("String")"/>"
+Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|("Boolean")|("String")"/>"
 %%
 
 {Workbook_start_tag} {return WsT;}  
@@ -102,7 +88,7 @@ Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")
 {Data_closing_tag} {return DcT;} 
 {Data_self_closing_tag} {return DscT;} 
 
-"<!--"[^-]*"-->" {printf(" ^^^^COMMENT^^^^ ");}
+"<!--"[^-]*"-->" {return COMMENT;}
 {content} {return CONTENT;}
 %%
 
