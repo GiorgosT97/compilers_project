@@ -19,9 +19,9 @@ extern FILE *yyout;
 %token SsT
 %token ScT
 %token SscT
-%token SScT
-%token SSsT
-%token SSscT
+%token StylescT
+%token StylessT
+%token StylesscT
 %token WA
 %token TA
 %token TsT
@@ -47,8 +47,27 @@ extern FILE *yyout;
 %%
 
 line: NewLine;
-WorkbookElement: WBsT line StylesElement line WBcT;
-StylesElement: SSsT line SScT;
+DataElement: DsT line DcT 
+                | DscT;
+CellElement: CEsT line DataElement line CEcT 
+                | CEscT;
+RowElement: RsT line CellElement line RcT 
+                | RscT;
+ColumnElement: CscT;
+TableElement: TsT line ColumnElement line RowElement line TcT
+                | TsT line ColumnElement line TcT
+                | TsT line RowElement line TcT
+                | TscT;
+WorksheetElement: WsT line TableElement line WcT
+                | WscT;
+StyleElement: SsT line ScT
+                | SscT;
+StylesElement: StylessT line StyleElement line StylescT
+                | StylesscT
+                | StylessT line StylescT;
+WorkbookElement: WBsT line StylesElement line WorksheetElement line WBcT
+                | WBsT line WorksheetElement line WBcT;
+
 
 %%
 

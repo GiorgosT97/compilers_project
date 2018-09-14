@@ -35,7 +35,7 @@ Style_self_closing_tag "<"{prefix}"Style"{Style_Attribute}{1}"/>"
 Worksheet_attributes (\ {prefix}"Name="{alphar}){1}(\ {prefix}"Protected="{bool})?
 Worksheet_start_tag "<"{prefix}"Worksheet"{Worksheet_attributes}">" 
 Worksheet_closing_tag "</"{prefix}"Worksheet>"
-Worksheet_self_closing_tag "<"{prefix}"Worksheet "{Worksheet_attributes}"/>"
+Worksheet_self_closing_tag "<"{prefix}"Worksheet"{Worksheet_attributes}"/>"
 
 Table_attributes ((\ {prefix}"ExpandedColumnCount="{number})|(\ {prefix}"ExpandedRowCount="{number})|(\ {prefix}"StyleID="{alphar}))*
 Table_start_tag "<"{prefix}"Table"{Table_attributes}">"
@@ -63,9 +63,9 @@ Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|(
 {newline} {printf("\n"); line_number++; return NewLine;}
 {Workbook_start_tag} {printf("%s", yytext); return WBsT;}  
 {Workbook_closing_tag} {printf("%s", yytext); return WBcT;}
-{Styles_start_tag} {printf("%s", yytext); return SSsT;}
-{Styles_closing_tag} {printf("%s", yytext); return SScT;}
-{Styles_self_closing_tag} {printf("%s", yytext); return SSscT;}
+{Styles_start_tag} {printf("%s", yytext); return StylessT;}
+{Styles_closing_tag} {printf("%s", yytext); return StylescT;}
+{Styles_self_closing_tag} {printf("%s", yytext); return StylesscT;}
 {Style_Attribute} {printf("%s", yytext); return SA;}
 {Style_start_tag} {printf("%s", yytext); return SsT;}
 {Style_closing_tag} {printf("%s", yytext); return ScT;}
