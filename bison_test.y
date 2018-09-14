@@ -3,14 +3,13 @@
 #include<stdlib.h>
 #include<string.h>
 int errorCount = 0; 
+extern int line_number;
 int yylex();
 void yyerror(char *);
 extern FILE *yyin;
 extern FILE *yyout;
 %}
-
-%token CONTENT
-%token COMMENT
+%start WorkbookElement
 %token WsT
 %token WBsT
 %token WcT
@@ -20,8 +19,8 @@ extern FILE *yyout;
 %token SsT
 %token ScT
 %token SscT
-%token SSsT
 %token SScT
+%token SSsT
 %token SSscT
 %token WA
 %token TA
@@ -41,20 +40,22 @@ extern FILE *yyout;
 %token DsT
 %token DcT
 %token DscT
+%token CONTENT
+%token COMMENT
+%token NewLine
 
 %%
 
-text: CONTENT  | ;
-data_element: DsT text DcT 
-                | DscT { fprintf("HELO"); }
-;
+line: NewLine;
+WorkbookElement: WBsT line StylesElement line WBcT;
+StylesElement: SSsT line SScT;
 
 %%
 
 void yyerror (char *s)
 {
     errorCount++;
-    fprintf(stderr,"%s on line \n",s); /*here I get the info about errors */
+    fprintf(stderr,"%s on line %d \n",s,line_number); /*here I get the info about errors */
 }
 
 int main(int argc, const char **argv)
@@ -72,6 +73,5 @@ int main(int argc, const char **argv)
     } else {
         printf("\nFound %d syntax errors\n",errorCount);
     }
-
     return 0;
 }

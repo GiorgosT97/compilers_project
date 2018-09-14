@@ -1,6 +1,9 @@
 %{
-#include "bison_test.tab.h"
-
+#include "y.tab.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int line_number = 1;
 %}
 %option noyywrap
 
@@ -13,7 +16,7 @@ other_chars [.,_:]
 whitespace [ \t]
 newline [\n]
 bool 0|1
-prefix ss:
+prefix "ss:"
 
 content ({alphar}|{other_chars}|{alphar}{whitespace}|{other_chars}{whitespace})+
 
@@ -56,39 +59,40 @@ Data_start_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|("Boolea
 Data_closing_tag "</"{prefix}"Data>"
 Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|("Boolean")|("String")"/>"
 %%
+{whitespace} {printf(" ");} 
+{newline} {printf("\n"); line_number++; return NewLine;}
+{Workbook_start_tag} {printf("%s", yytext); return WBsT;}  
+{Workbook_closing_tag} {printf("%s", yytext); return WBcT;}
+{Styles_start_tag} {printf("%s", yytext); return SSsT;}
+{Styles_closing_tag} {printf("%s", yytext); return SScT;}
+{Styles_self_closing_tag} {printf("%s", yytext); return SSscT;}
+{Style_Attribute} {printf("%s", yytext); return SA;}
+{Style_start_tag} {printf("%s", yytext); return SsT;}
+{Style_closing_tag} {printf("%s", yytext); return ScT;}
+{Style_self_closing_tag} {printf("%s", yytext); return SscT;}
+{Worksheet_attributes} {printf("%s", yytext); return WA;}
+{Worksheet_start_tag} {printf("%s", yytext); return WsT;} 
+{Worksheet_closing_tag} {printf("%s", yytext); return WcT;}
+{Worksheet_self_closing_tag} {printf("%s", yytext); return WscT;}
+{Table_attributes} {printf("%s", yytext); return TA;}
+{Table_start_tag} {printf("%s", yytext); return TsT;}
+{Table_closing_tag} {printf("%s", yytext); return TcT;}
+{Table_self_closing_tag} {printf("%s", yytext); return TscT;}
+{Column_attributes} {printf("%s", yytext); return CA;}
+{Column_self_closing_tag} {printf("%s", yytext); return CscT;}
+{Row_attributes} {printf("%s", yytext); return RA;}
+{Row_start_tag} {printf("%s", yytext); return RsT;}
+{Row_closing_tag} {printf("%s", yytext); return RcT;}
+{Row_self_closing_tag} {printf("%s", yytext); return RscT;}
+{Cell_attributes} {printf("%s", yytext); return CEA;}
+{Cell_start_tag} {printf("%s", yytext); return CEsT;} 
+{Cell_closing_tag} {printf("%s", yytext); return CEcT;} 
+{Cell_self_closing_tag} {printf("%s", yytext); return CEscT;} 
+{Data_start_tag} {printf("%s", yytext); return DsT;} 
+{Data_closing_tag} {printf("%s", yytext); return DcT;} 
+{Data_self_closing_tag} {printf("%s", yytext); return DscT;} 
 
-{Workbook_start_tag} {return WBsT;}  
-{Workbook_closing_tag} {return WBcT;}
-{Styles_start_tag} {return SStT;}
-{Styles_closing_tag} {return SScT;}
-{Styles_self_closing_tag} {return SSscT;}
-{Style_Attribute} {return SA;}
-{Style_start_tag} {return SsT;}
-{Style_closing_tag} {return ScT;}
-{Style_self_closing_tag} {return SscT;}
-{Worksheet_attributes} {return WA;}
-{Worksheet_start_tag} {return WsT;} 
-{Worksheet_closing_tag} {return WcT;}
-{Worksheet_self_closing_tag} {return WscT;}
-{Table_attributes} {return TA;}
-{Table_start_tag} {return TsT;}
-{Table_closing_tag} {return TcT;}
-{Table_self_closing_tag} {return TscT;}
-{Column_attributes} {return CA;}
-{Column_self_closing_tag} {return CscT;}
-{Row_attributes} {return RA;}
-{Row_start_tag} {return RsT;}
-{Row_closing_tag} {return RcT;}
-{Row_self_closing_tag} {return RscT;}
-{Cell_attributes} {return CEA;}
-{Cell_start_tag} {return CEsT;} 
-{Cell_closing_tag} {return CEcT;} 
-{Cell_self_closing_tag} {return CEscT;} 
-{Data_start_tag} {return DsT;} 
-{Data_closing_tag} {return DcT;} 
-{Data_self_closing_tag} {return DscT;} 
-
-"<!--"[^-]*"-->" {return COMMENT;}
-{content} {return CONTENT;}
+"<!--"[^-]*"-->" {printf("%s", yytext); return COMMENT;}
+{content} {printf("%s", yytext); return CONTENT;}
 %%
 
