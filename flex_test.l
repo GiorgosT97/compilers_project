@@ -10,15 +10,15 @@ int line_number = 1;
 letter [a-zA-Z]
 word   {letter}{letter}+
 digit  [0-9]
-number {digit}{digit}+
-alphar ({letter}|{digit})+
+number \"({digit}+)\"
+alphar (({letter}|{digit})+)|(\"({letter}|{digit})+\")
 other_chars [.,_:]
 whitespace [ \t]
 newline [\n]
 bool 0|1
 prefix "ss:"
 
-content ({alphar}|{other_chars}|{alphar}{whitespace}|{other_chars}{whitespace})+
+content (({alphar})|({other_chars})|({alphar}{whitespace})|({other_chars}{whitespace}))+
 
 Workbook_start_tag "<"{prefix}"Workbook>"
 Workbook_closing_tag "</"{prefix}"Workbook>"
