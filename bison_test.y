@@ -40,33 +40,55 @@ extern FILE *yyout;
 %token DsT
 %token DcT
 %token DscT
-%token CONTENT
 %token COMMENT
-%token NewLine
 
 %%
-
-line: NewLine;
-DataElement: DsT line DcT 
-                | DscT;
-CellElement: CEsT line DataElement line CEcT 
-                | CEscT;
-RowElement: RsT line CellElement line RcT 
-                | RscT;
-ColumnElement: CscT;
-TableElement: TsT line ColumnElement line RowElement line TcT
-                | TsT line ColumnElement line TcT
-                | TsT line RowElement line TcT
-                | TscT;
-WorksheetElement: WsT line TableElement line WcT
-                | WscT;
-StyleElement: SsT line ScT
-                | SscT;
-StylesElement: StylessT line StyleElement line StylescT
+DataElement: DsT  DcT 
+                | DscT
+                | DataElement  DsT  DcT  
+                | DataElement  DscT
+CellElement: CEsT  DataElement  CEcT 
+                | CEscT
+                | CellElement  CEsT  DataElement  CEcT 
+                | CellElement  CEscT
+                | CEsT CEcT 
+                | CellElement  CEsT CEcT;
+RowElement: RsT  CellElement  RcT 
+                | RscT
+                | RowElement  RsT  CellElement  RcT 
+                | RowElement  RscT
+                | RsT RcT 
+                | RowElement  RsT RcT;
+ColumnElement: CscT
+                | ColumnElement  CscT;
+TableElement: TsT  ColumnElement  RowElement  TcT
+                | TsT ColumnElement TcT
+                | TsT RowElement TcT
+                | TscT
+                | TsT TcT
+                | TableElement  TsT  ColumnElement  RowElement  TcT
+                | TableElement  TsT  ColumnElement  TcT
+                | TableElement  TsT  RowElement  TcT
+                | TableElement  TscT
+                | TableElement  TsT TcT;
+WorksheetElement: WsT  TableElement  WcT
+                | WscT
+                | WorksheetElement  WsT  TableElement  WcT
+                | WorksheetElement  WscT
+                | WsT WcT
+                | WorksheetElement  WsT WcT;
+StyleElement: SsT  ScT
+                | SscT
+                | StyleElement  SsT  ScT
+                | StyleElement  SscT;
+StylesElement: StylessT  StyleElement  StylescT
                 | StylesscT
-                | StylessT line StylescT;
-WorkbookElement: WBsT line StylesElement line WorksheetElement line WBcT
-                | WBsT line WorksheetElement line WBcT;
+                | StylessT  StylescT
+                | StylesElement  StylessT  StyleElement  StylescT
+                | StylesElement  StylesscT
+                | StylesElement  StylessT  StylescT;
+WorkbookElement: WBsT  StylesElement  WorksheetElement  WBcT
+                | WBsT  WorksheetElement  WBcT;
 
 
 %%
