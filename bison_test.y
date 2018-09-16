@@ -46,7 +46,7 @@ extern FILE *yyout;
 DataElement: DsT  DcT 
                 | DscT
                 | DataElement  DsT  DcT  
-                | DataElement  DscT
+                | DataElement  DscT;
 CellElement: CEsT  DataElement  CEcT 
                 | CEscT
                 | CellElement  CEsT  DataElement  CEcT 
@@ -96,7 +96,7 @@ WorkbookElement: WBsT  StylesElement  WorksheetElement  WBcT
 void yyerror (char *s)
 {
     errorCount++;
-    fprintf(stderr,"%s on line %d \n",s,line_number); /*here I get the info about errors */
+    fprintf(stderr,"%s on line %d \n",s,line_number);
 }
 
 int main(int argc, const char **argv)
@@ -107,12 +107,13 @@ int main(int argc, const char **argv)
         yyin = stdin;
     }
 
-    int result;
 
-    if ((result = yyparse()) == 0) {   
-        printf("No syntax errors\n");
-    } else {
+    if (yyparse()) {   
         printf("\nFound %d syntax errors\n",errorCount);
     }
+    else {
+        printf("No syntax errors\n");
+    }
+        
     return 0;
 }
