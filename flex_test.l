@@ -55,9 +55,10 @@ Cell_start_tag "<"{prefix}"Cell"{Cell_attributes}">"
 Cell_closing_tag "</"{prefix}"Cell>"
 Cell_self_closing_tag "<"{prefix}"Cell"{Cell_attributes}"/>"
 
-Data_start_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|("Boolean")|("String")">"
+Data_attributes \ {prefix}"Type="\"(("String")|("Number")|("Boolean")("Datetime"))\"
+Data_start_tag "<"{prefix}"Data"{Data_attributes}">"
 Data_closing_tag "</"{prefix}"Data>"
-Data_self_closing_tag "<"{prefix}"Data "{prefix}"Type="("Number")|("DateTime")|("Boolean")|("String")"/>"
+Data_self_closing_tag "<"{prefix}"Data"{Data_attributes}"/>"
 %%
 {whitespace} {printf(" ");} 
 {newline} {printf("\n"); line_number++; return NewLine;}
