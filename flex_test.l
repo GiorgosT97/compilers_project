@@ -93,6 +93,6 @@ Data_self_closing_tag "<"{prefix}"Data"{Data_attributes}"/>"
 {Data_self_closing_tag} {printf("%s", yytext); return DscT;} 
 
 "<!--"[^-]*(-[^-]+)*"-->" {printf("%s", yytext);}
-
+.    { return *yytext; }
 %%
 
