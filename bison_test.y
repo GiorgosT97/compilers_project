@@ -40,7 +40,6 @@ extern FILE *yyout;
 %token DsT
 %token DcT
 %token DscT
-%token COMMENT
 
 %%
 DataElement: DsT  DcT 
